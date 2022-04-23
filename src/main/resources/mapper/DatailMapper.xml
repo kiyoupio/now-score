@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.nowscore.mapper.DetailMapper">
+    <resultMap id="DetailStatistic" type="com.example.nowscore.domain.DetailStatistic">
+        <result property="detailUrl" column="detail_url"/>
+        <result property="initialMaxHostWin" column="initial_max_host_win"/>
+        <result property="initialMaxDraw" column="initial_max_draw"/>
+        <result property="initialMaxGuestWin" column="initial_max_guest_win"/>
+        <result property="instantMaxHostWin" column="instant_max_host_win"/>
+        <result property="instantMaxDraw" column="instant_max_draw"/>
+        <result property="instantMaxGuestWin" column="instant_max_guest_win"/>
+        <result property="initialMaxReturnRate" column="initial_max_return_rate"/>
+        <result property="instantMaxReturnRate" column="instant_max_return_rate"/>
+        <result property="initialMinHostWin" column="initial_min_host_win"/>
+        <result property="initialMinDraw" column="initial_min_draw"/>
+        <result property="initialMinGuestWin" column="initial_min_guest_win"/>
+        <result property="instantMinHostWin" column="instant_min_host_win"/>
+        <result property="instantMinDraw" column="instant_min_draw"/>
+        <result property="instantMinGuestWin" column="instant_min_guest_win"/>
+        <result property="initialMinReturnRate" column="initial_min_return_rate"/>
+        <result property="instantMinReturnRate" column="instant_min_return_rate"/>
+        <result property="initialAvgHostWin" column="initial_avg_host_win"/>
+        <result property="initialAvgDraw" column="initial_avg_draw"/>
+        <result property="initialAvgGuestWin" column="initial_avg_guest_win"/>
+        <result property="instantAvgHostWin" column="instant_avg_host_win"/>
+        <result property="instantAvgDraw" column="instant_avg_draw"/>
+        <result property="instantAvgGuestWin" column="instant_avg_guest_win"/>
+        <result property="initialAvgReturnRate" column="initial_avg_return_rate"/>
+        <result property="instantAvgReturnRate" column="instant_avg_return_rate"/>
+        <result property="maxKaliLow" column="max_kali_low"/>
+        <result property="maxKaliMid" column="max_kali_mid"/>
+        <result property="maxKaliHigh" column="max_kali_high"/>
+        <result property="minKaliLow" column="min_kali_low"/>
+        <result property="minKaliMid" column="min_kali_mid"/>
+        <result property="minKaliHigh" column="min_kali_high"/>
+        <result property="avgKaliLow" column="avg_kali_low"/>
+        <result property="avgKaliMid" column="avg_kali_mid"/>
+        <result property="avgKaliHigh" column="avg_kali_high"/>
+    </resultMap>
+
+    <select id="selectDetailStatistic" parameterType="String" resultType="com.example.nowscore.domain.DetailStatistic">
+        select `detail`.`detail_url`                  AS `detail_url`,
+        max(`detail`.`initial_host_win`)              AS `initial_max_host_win`,
+        max(`detail`.`initial_draw`)                  AS `initial_max_draw`,
+        max(`detail`.`initial_guest_win`)             AS `initial_max_guest_win`,
+        max(`detail`.`instant_host_win`)              AS `instant_max_host_win`,
+        max(`detail`.`instant_draw`)                  AS `instant_max_draw`,
+        max(`detail`.`instant_guest_win`)             AS `instant_max_guest_win`,
+        max(`detail`.`initial_return_rate`)           AS `initial_max_return_rate`,
+        max(`detail`.`instant_return_rate`)           AS `instant_max_return_rate`,
+        min(`detail`.`initial_host_win`)              AS `initial_min_host_win`,
+        min(`detail`.`initial_draw`)                  AS `initial_min_draw`,
+        min(`detail`.`initial_guest_win`)             AS `initial_min_guest_win`,
+        min(`detail`.`instant_host_win`)              AS `instant_min_host_win`,
+        min(`detail`.`instant_draw`)                  AS `instant_min_draw`,
+        min(`detail`.`instant_guest_win`)             AS `instant_min_guest_win`,
+        min(`detail`.`initial_return_rate`)           AS `initial_min_return_rate`,
+        min(`detail`.`instant_return_rate`)           AS `instant_min_return_rate`,
+        round(avg(`detail`.`initial_host_win`), 2)    AS `initial_avg_host_win`,
+        round(avg(`detail`.`initial_draw`), 2)        AS `initial_avg_draw`,
+        round(avg(`detail`.`initial_guest_win`), 2)   AS `initial_avg_guest_win`,
+        round(avg(`detail`.`instant_host_win`), 2)    AS `instant_avg_host_win`,
+        round(avg(`detail`.`instant_draw`), 2)        AS `instant_avg_draw`,
+        round(avg(`detail`.`instant_guest_win`), 2)   AS `instant_avg_guest_win`,
+        round(avg(`detail`.`initial_return_rate`), 2) AS `initial_avg_return_rate`,
+        round(avg(`detail`.`instant_return_rate`), 2) AS `instant_avg_return_rate`,
+        max(`detail`.`kali_low`)                      AS `max_kali_low`,
+        max(`detail`.`kali_mid`)                      AS `max_kali_mid`,
+        max(`detail`.`kali_high`)                     AS `max_kali_high`,
+        min(`detail`.`kali_low`)                      AS `min_kali_low`,
+        min(`detail`.`kali_mid`)                      AS `min_kali_mid`,
+        min(`detail`.`kali_high`)                     AS `min_kali_high`,
+        round(avg(`detail`.`kali_low`), 2)            AS `avg_kali_low`,
+        round(avg(`detail`.`kali_mid`), 2)            AS `avg_kali_mid`,
+        round(avg(`detail`.`kali_high`), 2)           AS `avg_kali_high`
+        from `detail`
+        where `detail`.`detail_url` = #{detailUrl};
+    </select>
+</mapper>
